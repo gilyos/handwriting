@@ -3,8 +3,8 @@
   <div class="questionsContainer" v-if=isActive>
     <img class='questionImg' :src="img" alt="">
     <div class="btnContainer">
-       <button type="button" class="btn btn-primary btn-lg"><b>Male</b></button>
-       <button type="button" class="btn btn-danger btn-lg"><b>Female</b></button> 
+       <button type="button" @click="userAnswer(leftMark)" class="btn btn-danger btn-lg" v-bind:disabled="btnDisabled"><b>{{leftOption}}</b></button> 
+       <button type="button" @click="userAnswer(rightMark)" class="btn btn-primary btn-lg" v-bind:disabled="btnDisabled" ><b>{{rightOption}}</b></button>
     </div>
   </div>
   <div v-else>
@@ -17,29 +17,38 @@
 export default {
   data () {
     return {
-        userIndexQuestion : this.$store.getters.userDataIndex
+        userIndexQuestion : this.$store.getters.userDataIndex,
+        btnDisabled : false,
+        leftMark: this.$store.getters.getLeftMarkSelection,
+        rightMark: this.$store.getters.getRightMarkSelection,
+        leftOption: this.$store.getters.getLeftSelection,
+        rightOption: this.$store.getters.getRightSelection
     }
   },
   computed : {
       img() {
-            if (this.$store.getters.userAnswersData.length > 0) {
+            if (this.$store.getters.userAnswersData.length > 0 
+            && this.$store.getters.userDataIndex < this.$store.getters.userAnswersData.length) {
                 return this.$store.getters.userAnswersData[this.$store.getters.userDataIndex].imgUrl;
+            } else if (this.$store.getters.userAnswersData.length == this.$store.getters.userDataIndex) {
+                this.$router.push('complete')
             }
             return null;
-      },
-      isAnswerAllQuestions() {
-          if (this.$store.getters.userAnswersData.length == userIndexQuestion) {
-                this.$router.push('complete')
-          }
       },
       isActive() {
             return this.$store.getters.isImagesLoaded;
       }
   }, methods: {
       userAnswer(answer) {
-          this.$store.dispatch('increaseUserDataIndex');
-          this.$store.dispatch('setUserAnswer', answer);
-          
+          this.$store.dispatch('setUserAnswer', answer); 
+          this.delayAnswer();   
+      },
+      delayAnswer() {
+          this.btnDisabled = true;
+          window.setTimeout(function (_this) {
+              debugger;
+            _this.btnDisabled = false;
+          },1000, this);          
       }
   }
 }
@@ -48,10 +57,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+
 .questionImg {
     position: relative;
     width:95%;
     height:50%;
+    background-color: rgba(0,0,0,0.25);
 }
 
 .btnContainer {

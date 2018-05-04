@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>{{this.$store.getters.userDataIndex + 1}} / {{totalQuestions}}</div>
     <app-question></app-question>
   </div>
 </template>
@@ -13,8 +14,16 @@ export default {
   },
   data () {
     return {
-     
+      totalQuestions: app.$store.getters.userAnswersData.length
     }
+  },
+  created() {
+    window.setTimeout(function (){
+      if (!app.$store.getters.isImagesLoaded) {
+        app.$router.push('/');
+      }
+    },1500)
+
   }
  
 }

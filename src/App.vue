@@ -8,6 +8,7 @@
 export default {
   name: 'App'
 }
+
 </script>
 
 <style>
@@ -17,6 +18,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+
 }
+
+ @media only screen and (min-width: 600px)  {
+   #app {
+     width:500px;
+    left:50%;
+    margin-left:-250px;
+    position: absolute;
+   }
+ }
 </style>
