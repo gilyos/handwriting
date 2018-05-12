@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Instractions from '@/components/Instractions'
+import TransitionScreen from '@/components/TransitionScreen'
 import UserDetails from '@/components/UserDetails'
 import QuestionsManager from '@/components/QuestionsManager'
 import Complete from '@/components/Complete'
@@ -22,17 +23,22 @@ export default new Router({
     },
     {
       path: '/userdetails',
-      name: 'UserDetails',
+      name: 'userdetails',
       component: UserDetails
     },
     {
+      path: '/transitionscreen',
+      name: 'transitionScreen',
+      component: TransitionScreen
+    },
+    {
       path: '/questions',
-      name: 'QuestionsManager',
+      name: 'questionsManager',
       component: QuestionsManager
     },
     {
       path: '/complete',
-      name: 'Complete',
+      name: 'complete',
       component: Complete
     },
   ]

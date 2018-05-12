@@ -18,8 +18,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
-
+  padding-top:20px;
 }
 
  @media only screen and (min-width: 600px)  {

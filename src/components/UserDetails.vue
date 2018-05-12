@@ -43,7 +43,7 @@ export default {
       GenderMarks: ["Female","Male"],
       EducationLabel: "השכלה",
       EducationSelection: ["אחר","דר'‏","תואר שני","תואר ראשון", "בוגר תיכון", "תלמיד תיכון"],
-      EducationMarks: ["Other","Dr","First Degree","Second Degree","High School Diploma","High School Student"],
+      EducationMarks: ["Other","Dr","Second Degree","First Degree","High School Diploma","High School Student"],
       btnMsg: "התחל בסקר"
     };
   },
@@ -55,12 +55,11 @@ export default {
         userDetails.age = $(selectedDetails[0]).attr("data-val");
         userDetails.gender = $(selectedDetails[1]).attr("data-val");
         userDetails.education = $(selectedDetails[2]).attr("data-val");
-        this.$router.push("questions");
+        this.$router.push("transitionscreen");
       }
     }
   },
   created() {
-    debugger;
     this.$store.dispatch('setImagesLoadedStatus', true);
     getAllListQuestions("en", app.$store.getters.getNumberEnQuestions, function() {
       getAllListQuestions("heb", app.$store.getters.getNumberHebQuestions);

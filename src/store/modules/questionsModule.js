@@ -4,6 +4,7 @@ const state = {
     imageListNames: imagesData,
     userAnswersData: [],
     userAnswerIndex: 0,
+    
     userDetails: {
         userId : new Date().getTime(),
         age : '',
@@ -14,6 +15,9 @@ const state = {
     questions: {
         en: 15,
         heb: 15,
+        currectAnswersOn_en: 0,
+        currectAnswersOn_heb: 0,
+        currentQuestionLang: 'en',
         selectOptions: {
             left:'',
             right:''
@@ -23,12 +27,20 @@ const state = {
 };
 
 const mutations = {
+    'SET_CURRENT_QUESTION_LANG' (state, lang) {
+        state.questions.currentQuestionLang = lang;
+    },
     'SET_LOADED_IMAGES_STATUS' (state, status) {
         state.isLoaded = status;
     },
     'SET_USER_ANSWER' (state, _userAnswer) {
         state.userAnswersData[state.userAnswerIndex].userAnswer = _userAnswer;
         debugger;
+        if (_userAnswer == state.userAnswersData[state.userAnswerIndex].correctAnswer) {
+            
+            var curLang = state.questions.currentQuestionLang;
+            state.questions['currectAnswersOn_' + curLang]++;
+        }
         window.updateDB(
             state.userAnswersData[state.userAnswerIndex].type,
             state.userDetails.userId,
@@ -55,7 +67,6 @@ const mutations = {
         state.userAnswerIndex++;
     },
     'INIT_USER_DATA_INDEX' (state) {
-        debugger;
         state.userAnswerIndex = 0;
     },
     'SET_CURRENT_IMAGE' (state, imageUrl) {

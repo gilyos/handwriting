@@ -77,7 +77,6 @@ window.getRandomImages = function (numberQuestions) {
                 } else {
                     correctAnswer = imageName.match(/\_L/) != null ? 'L' : 'R'
                 }
-                debugger;
                 app.$store.dispatch('setQuestionData', {
                     type: app.$store.getters.getTypeSelection,
                     imgName : imageName,
