@@ -45,7 +45,7 @@ export default {
       isBroswerSupport: !(navigator.userAgent.match('CriOS') != null && navigator.userAgent.toLowerCase().match(/iphone|ipad/) != null)
     };
   },
-  created() {
+  created() { 
     if (typeof this.$route.query.qt != "undefined") {
       if (this.$route.query.qt == 1) {
         this.$store.dispatch("setSelectionOptions", {
